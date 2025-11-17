@@ -1003,7 +1003,8 @@
   margin: 30px auto 0;
   border-radius: 18px;
   padding: 20px;
-  position: relative;   /* wajib */
+  padding-top: 60px;   /* ⬅️ Tambahan baru: bikin konten turun ke tengah */
+  position: relative;
   color: #fff;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
 
@@ -1015,13 +1016,13 @@
   transform: translateY(30px);
   transition: 0.5s ease;
 
-  /* HAPUS FLEX TENGAH YG BIKIN NGACO */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;   /* ini FIX tombol */
+  justify-content: flex-start; 
   gap: 5px;
 }
+
 
 
 @keyframes premiumMove {
