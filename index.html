@@ -992,7 +992,7 @@
   background: #ffe9a8;
 }
 
-/* ====== KARTU ATM BCA VERSION PREMIUM ====== */
+/* Kartu ATM Premium */
 .atm-card {
   width: 100%;
   max-width: 380px;
@@ -1004,27 +1004,27 @@
   color: #fff;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
 
-  /* BCA blue chrome background */
-  background: url("https://i.imgur.com/7mm4cLW.png");
-  background-size: cover;
-  background-position: center;
+  /* GRADASI PREMIUM */
+  background: linear-gradient(
+    135deg,
+    #001f4d,
+    #003a80,
+    #0070c0,
+    #005b99
+  );
+  background-size: 300% 300%;
+  animation: premiumMove 6s ease infinite;
 
   opacity: 0;
   transform: translateY(30px);
   transition: 0.5s ease;
 }
 
-.atm-card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Logo BCA */
-.bank-logo {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  width: 80px;
+/* Efek gradasi bergerak lembut */
+@keyframes premiumMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Chip Kartu */
