@@ -995,7 +995,7 @@
   background: #ffe9a8;
 }
 
-/* ====== KARTU ATM PREMIUM ====== */
+/* ====== KARTU ATM PREMIUM (FIX POSITION) ====== */
 .atm-card {
   width: 100%;
   max-width: 380px;
@@ -1007,23 +1007,22 @@
   color: #fff;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
 
-  /* GRADASI PREMIUM BIRU METAL */
-  background: linear-gradient(
-    135deg,
-    #001f4d,
-    #003a80,
-    #0070c0,
-    #004a85
-  );
+  /* GRADIENT PREMIUM */
+  background: linear-gradient(135deg, #001f4d, #003a80, #0070c0, #004a85);
   background-size: 300% 300%;
   animation: premiumMove 6s ease infinite;
 
   opacity: 0;
   transform: translateY(30px);
   transition: 0.5s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Nomor rekening di tengah */
+  align-items: center;
+  gap: 5px;
 }
 
-/* Animasi gerakan gradasi */
 @keyframes premiumMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -1042,35 +1041,36 @@
   right: 20px;
   font-size: 18px;
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
-/* Chip Kartu */
+/* Chip di pojok kiri atas */
 .atm-chip {
-  width: 50px;
-  height: 36px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 48px;
+  height: 34px;
   background: linear-gradient(135deg, gold, #d4af37);
   border-radius: 8px;
-  margin-top: 55px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 8px rgba(255,215,0,0.5);
+  box-shadow: 0 0 8px rgba(255,215,0,0.4);
 }
 
-/* Nomor Rekening */
+/* Nomor rekening - benar2 di tengah */
 .rek-number {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 /* Nama pemilik */
 .rek-name {
-  font-size: 16px;
-  margin-top: 5px;
+  font-size: 15px;
   opacity: 0.9;
+  text-align: center;
 }
 
-/* Tombol Salin */
+/* Tombol salin */
 .copy-btn {
   position: absolute;
   bottom: 18px;
@@ -1091,11 +1091,7 @@
   transform: scale(1.05);
 }
 
-.hidden {
-  display: none;
-}
-
-
+.hidden { display: none; }
 
   </style>
 </head>
@@ -1390,27 +1386,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// BUKA GIFT
+  // BUKA GIFT
   document.getElementById("openGiftBtn").addEventListener("click", function () {
     const card = document.getElementById("atmCard");
 
     card.classList.remove("hidden");
 
-    // Animasi fade naik
     setTimeout(() => {
       card.classList.add("show");
     }, 50);
 
-    this.style.display = "none"; // hilangkan tombol
+    this.style.display = "none";
   });
 
-  // SALIN NOMOR REKENING
+  // SALIN NOMOR REKENING (FULL SUPPORT)
   function copyRek() {
     const nomor = document.getElementById("nomorRek").innerText;
 
-    navigator.clipboard.writeText(nomor);
-
-    alert("Nomor rekening tersalin: " + nomor);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(nomor).then(() => {
+        alert("Nomor rekening tersalin: " + nomor);
+      });
+    } else {
+      // Fallback lama (untuk HP jadul)
+      const temp = document.createElement("textarea");
+      temp.value = nomor;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      alert("Nomor rekening tersalin: " + nomor);
+    }
   }
   // ============================================================
   // === NAMA TAMU DARI URL ===
