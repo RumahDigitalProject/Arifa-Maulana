@@ -949,6 +949,9 @@
 /* ====== GIFT WEDDING SECTION ====== */
 #gift {
   background: linear-gradient(135deg, #1a1f3c, #000);
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff;
 }
 
 .GIFT-title {
@@ -992,7 +995,7 @@
   background: #ffe9a8;
 }
 
-/* Kartu ATM Premium */
+/* ====== KARTU ATM PREMIUM ====== */
 .atm-card {
   width: 100%;
   max-width: 380px;
@@ -1004,13 +1007,13 @@
   color: #fff;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
 
-  /* GRADASI PREMIUM */
+  /* GRADASI PREMIUM BIRU METAL */
   background: linear-gradient(
     135deg,
     #001f4d,
     #003a80,
     #0070c0,
-    #005b99
+    #004a85
   );
   background-size: 300% 300%;
   animation: premiumMove 6s ease infinite;
@@ -1020,35 +1023,51 @@
   transition: 0.5s ease;
 }
 
-/* Efek gradasi bergerak lembut */
+/* Animasi gerakan gradasi */
 @keyframes premiumMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+.atm-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nama Bank */
+.bank-name {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
 /* Chip Kartu */
 .atm-chip {
   width: 50px;
-  height: 38px;
-  background: linear-gradient(135deg, #d4d4d4, #8d8d8d);
-  border-radius: 6px;
+  height: 36px;
+  background: linear-gradient(135deg, gold, #d4af37);
+  border-radius: 8px;
   margin-top: 55px;
   margin-bottom: 20px;
+  box-shadow: 0 0 8px rgba(255,215,0,0.5);
 }
 
-/* Nomor Rek */
+/* Nomor Rekening */
 .rek-number {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 2px;
 }
 
-/* Nama Pemilik */
+/* Nama pemilik */
 .rek-name {
   font-size: 16px;
   margin-top: 5px;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 /* Tombol Salin */
@@ -1072,7 +1091,6 @@
   transform: scale(1.05);
 }
 
-/* hide */
 .hidden {
   display: none;
 }
@@ -1242,8 +1260,9 @@
 </section>
 
 <!-- === SECTION GIFT WEDDING === -->
-<section id="gift" class="section" style="padding:60px 20px; text-align:center; color:#fff;">
+<section id="gift" class="section">
   <div class="gift-container animasi-scroll">
+
     <h2 class="GIFT-title">Gift Wedding</h2>
 
     <p class="gift-thanks">
@@ -1253,28 +1272,23 @@
 
     <button id="openGiftBtn" class="btn-gift">Buka Gift</button>
 
-    <!-- KARTU ATM BCA -->
-    <div id="atmCard" class="atm-card">
+    <!-- Kartu ATM -->
+    <div id="atmCard" class="atm-card hidden">
 
-      <!-- LOGO BCA -->
-      <div class="bank-logo">
-        <svg width="65" height="28" viewBox="0 0 300 120" fill="white">
-          <path d="M52 10C34 10 20 24 20 42C20 73 63 104 63 104C63 104 106 73 106 42C106 24 92 10 74 10C64 10 56 15 52 23C48 15 40 10 30 10H52Z"/>
-        </svg>
-      </div>
+      <div class="bank-name">BANK BCA</div>
 
       <div class="atm-chip"></div>
 
-      <div class="rek-number" id="nomorRek">1234567890</div>
+      <div class="rek-number" id="nomorRek">1234 5678 9090</div>
 
-      <div class="rek-name">A/N: Nama Pemilik Rekening</div>
+      <div class="rek-name">A/N: Nama Penerima</div>
 
       <button class="copy-btn" onclick="copyRek()">Salin</button>
-
     </div>
 
   </div>
 </section>
+
 
 
   
@@ -1376,19 +1390,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// tombol buka gift
-  document.getElementById("openGiftBtn").addEventListener("click", function() {
+// BUKA GIFT
+  document.getElementById("openGiftBtn").addEventListener("click", function () {
     const card = document.getElementById("atmCard");
+
     card.classList.remove("hidden");
-    setTimeout(() => card.classList.add("show"), 20);
+
+    // Animasi fade naik
+    setTimeout(() => {
+      card.classList.add("show");
+    }, 50);
+
+    this.style.display = "none"; // hilangkan tombol
   });
 
-  // fungsi salin nomor rekening
+  // SALIN NOMOR REKENING
   function copyRek() {
-    const rek = document.getElementById("nomorRek").innerText;
-    navigator.clipboard.writeText(rek);
+    const nomor = document.getElementById("nomorRek").innerText;
 
-    alert("Nomor rekening disalin!");
+    navigator.clipboard.writeText(nomor);
+
+    alert("Nomor rekening tersalin: " + nomor);
   }
   // ============================================================
   // === NAMA TAMU DARI URL ===
