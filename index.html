@@ -946,7 +946,81 @@
   transform: scale(1) translateY(0);
 }
 
+/* -------------------------------
+   STYLE BOX GIFT UTAMA
+-------------------------------- */
+.gift-box {
+  background: #fafafa;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  max-width: 420px;
+  margin: 20px auto;
+}
 
+/* Tombol Gift */
+.gift-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #a70d2a;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.gift-btn:hover {
+  transform: scale(1.07);
+}
+
+/* -------------------------------
+   KARTU ATM REKENING
+-------------------------------- */
+.card-rek-container {
+  display: none;
+  margin-top: 20px;
+}
+.card-rek {
+  width: 100%;
+  background: linear-gradient(135deg, #8b1533, #c92f52);
+  border-radius: 20px;
+  padding: 25px;
+  color: white;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Nama Bank kanan atas */
+.card-rek .bank-name {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* No Rekening di tengah */
+.card-rek .rek-number {
+  margin-top: 70px;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+/* Nama Pemilik di bawah */
+.card-rek .owner {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.9;
+  }
 
   </style>
 </head>
@@ -1110,6 +1184,30 @@
 </div>
 </section>
 
+<!-- ===============================
+     HTML CONTENT
+=================================-->
+<div class="gift-box">
+  <h3 style="margin-bottom:10px;">Wedding Gift</h3>
+  <p style="font-size:14px; opacity:0.8;">
+    Doa dan restu Anda adalah karunia terindah. 
+    Anda dapat mengirim kado secara cashless melalui fitur di bawah ini.
+  </p>
+
+  <div class="gift-btn" onclick="toggleRek()">
+    🎁 Gift Wedding
+  </div>
+
+  <!-- KARTU ATM -->
+  <div class="card-rek-container" id="rekeningCard">
+    <div class="card-rek">
+      <div class="bank-name">BCA</div>
+      <div class="rek-number">123 456 7890</div>
+      <div class="owner">a/n Nama Mempelai</div>
+    </div>
+  </div>
+</div>
+  
 <!-- === SECTION RSVP & UCAPAN === -->
 <section id="rsvp" class="section" style="padding:60px 20px; text-align:center; color:#fff;">
   <div class="rsvp-container">
@@ -1206,7 +1304,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
 
+// ============================================================
+  // === GIFT ===
+  // ==================================================
+function toggleRek() {
+  const box = document.getElementById("rekeningCard");
 
+  if (box.style.display === "none" || box.style.display === "") {
+    box.style.display = "block";
+  } else {
+    box.style.display = "none";
+  }
+}
   // ============================================================
   // === NAMA TAMU DARI URL ===
   // ============================================================
