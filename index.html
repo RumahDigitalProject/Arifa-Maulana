@@ -945,39 +945,133 @@
   opacity: 1;
   transform: scale(1) translateY(0);
 }
-/* Kotak Gift awal */
-.gift-box{background:white;border-radius:16px;padding:10px 14px;box-shadow:0 8px 30px rgba(15,23,42,0.06);display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px}
-.gift-text{flex:1}
-.title{font-size:20px;font-weight:700;margin:0 0 6px}
-.subtitle{color:var(--muted);margin:0 0 12px}
-.desc{color:var(--muted);line-height:1.5;margin:0}
+/* ====== GIFT WEDDING SECTION ====== */
+#gift {
+  background: linear-gradient(135deg, #1a1f3c, #000);
+}
 
+.GIFT-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 32px;
+  color: #ffdd7d;
+  margin-bottom: 20px;
+}
 
-.gift-actions{display:flex;justify-content:center;width:100%;}
-.btn{background:linear-gradient(90deg,var(--accent),#7c3aed);color:white;border:0;padding:10px 16px;border-radius:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px}
-.btn:active{transform:translateY(1px)}
+.gift-container {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
 
+.gift-thanks {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
 
-/* Area yang muncul */
-.reveal{margin-top:18px;overflow:hidden;max-height:0;transition:max-height .45s cubic-bezier(.2,.9,.3,1)}
-.reveal.open{max-height:260px}
+/* Tombol Buka Gift */
+.btn-gift {
+  background: #ffdd7d;
+  color: #2e1f00;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
+.btn-gift:hover {
+  transform: scale(1.05);
+  background: #ffe9a8;
+}
 
-/* Kartu rekening (ATM-like) */
-.atm-card{margin-top:12px;background:linear-gradient(135deg,#0b1220 0%, #10243a 100%);color:white;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 10px 30px rgba(2,6,23,0.45);position:relative}
-.bank-name{position:absolute;right:16px;top:12px;font-weight:700;opacity:0.95}
-.chip{width:56px;height:40px;border-radius:6px;background:linear-gradient(180deg,#ffd089,#d9972b);box-shadow:inset 0 -3px 6px rgba(0,0,0,0.15)}
-.row{display:flex;align-items:center;justify-content:space-between}
-.acc-number{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:20px;letter-spacing:3px;text-align:center;margin:6px 0}
-.acc-name{font-size:13px;opacity:0.9}
+/* Kartu ATM */
+.atm-card {
+  width: 100%;
+  max-width: 380px;
+  height: 220px;
+  background: linear-gradient(135deg, #1b1b1b, #3a3a3a);
+  margin: 30px auto 0;
+  border-radius: 18px;
+  padding: 20px;
+  position: relative;
+  color: #fff;
+  box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
+  background-image: url('https://i.imgur.com/jmDf1iJ.png');
+  background-size: cover;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.5s ease;
+}
 
+.atm-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-.card-footer{display:flex;justify-content:space-between;align-items:center}
-.copy-btn{background:transparent;border:1px solid rgba(255,255,255,0.12);padding:8px 10px;border-radius:10px;color:white;cursor:pointer;font-weight:600}
+/* Nama Bank */
+.bank-name {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 
+/* Chip Kartu */
+.atm-chip {
+  width: 45px;
+  height: 35px;
+  background: gold;
+  border-radius: 6px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
 
-/* kecil */
-@media (max-width:520px){.gift-box{flex-direction:column;align-items:flex-start}.gift-actions{flex-direction:row;width:100%;justify-content:space-between}.bank-name{right:12px;top:10px}
+/* Nomor Rek & Nama */
+.rek-number {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.rek-name {
+  font-size: 16px;
+  margin-top: 5px;
+  opacity: 0.9;
+}
+
+/* Tombol Salin */
+.copy-btn {
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  background: #ffdd7d;
+  color: #1c1400;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.copy-btn:hover {
+  background: #ffe9a8;
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
 
   </style>
 </head>
@@ -1141,44 +1235,34 @@
 </div>
 </section>
 
-<div class="container">
-<!-- Kotak Gift awal -->
-<div class="gift-box" role="region" aria-label="Gift wedding">
-<div class="gift-text">
-<h2 class="RSVP-title animasi-scroll"> Wedding Gift</h2>
-<p class="subtitle">Doa dan restu Anda merupakan karunia yang sangat berarti bagi kami.</p>
-<p class="desc">dan jika memberi adalah ungkapan tanda kasih anda, anda dapat memberi kado secara cashless</p>
-</div>
-<div class="gift-actions">
-<button id="giftBtn" class="btn" aria-expanded="false">🎁 Gift Wedding</button>
-</div>
-</div>
+<!-- === SECTION GIFT WEDDING === -->
+<section id="gift" class="section" style="padding:60px 20px; text-align:center; color:#fff;">
+  <div class="gift-container animasi-scroll">
+    <h2 class="GIFT-title">Gift Wedding</h2>
 
+    <p class="gift-thanks">
+      Terima kasih atas doa, restu, serta tanda kasih yang diberikan.  
+      Semoga kebaikan kembali berlipat untuk Anda 🤍
+    </p>
 
-<!-- Area yang muncul setelah tombol ditekan -->
-<div id="reveal" class="reveal" aria-hidden="true">
-<div class="atm-card" role="group" aria-label="Informasi rekening">
-<div class="bank-name" id="bankName">SEA BANK</div>
-<div class="row">
-<div class="chip" aria-hidden="true"></div>
-<div style="flex:1"></div>
-</div>
+    <button id="openGiftBtn" class="btn-gift">Buka Gift</button>
 
+    <!-- KARTU ATM (disembunyikan dulu) -->
+    <div id="atmCard" class="atm-card hidden">
+      <div class="bank-name">BANK MANDIRI</div>
 
-<div style="display:flex;flex-direction:column;align-items:center">
-<div class="acc-number" id="accNumber">9011 6173 5590</div>
-<div class="acc-name">Arifa Khamida Zuninda Putri</div>
-</div>
+      <div class="atm-chip"></div>
 
+      <div class="rek-number" id="nomorRek">1234 5678 9012 3456</div>
 
-<div class="card-footer">
-<div style="font-size:12px;opacity:0.9">Transfer via mobile banking / QRIS / ATM</div>
-<div style="display:flex;gap:8px;align-items:center">
-<button id="copyBtn" class="copy-btn" title="Salin nomor rekening">Salin</button>
-</div>
-</div>
-</div>
-</div>
+      <div class="rek-name">A/N: Nama Penerima</div>
+
+      <button class="copy-btn" onclick="copyRek()">Salin</button>
+    </div>
+
+  </div>
+</section>
+
 
   
 <!-- === SECTION RSVP & UCAPAN === -->
@@ -1277,75 +1361,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
 
-// Data default — ubah sesuai kebutuhan
-const DATA = {
-bank: 'SEA BANK',
-account: '901161735590',
-displayAccount: function(){ // format tampil dengan spasi tiap 4 digit
-return this.account.replace(/(.{4})/g,'$1 ').trim();
-},
-holder: 'Arifa Khamida Zuninda Putri'
-}
 
 
-const giftBtn = document.getElementById('giftBtn')
-const reveal = document.getElementById('reveal')
-const bankName = document.getElementById('bankName')
-const accNumber = document.getElementById('accNumber')
-const copyBtn = document.getElementById('copyBtn')
+// tombol buka gift
+  document.getElementById("openGiftBtn").addEventListener("click", function() {
+    const card = document.getElementById("atmCard");
+    card.classList.remove("hidden");
+    setTimeout(() => card.classList.add("show"), 20);
+  });
 
+  // fungsi salin nomor rekening
+  function copyRek() {
+    const rek = document.getElementById("nomorRek").innerText;
+    navigator.clipboard.writeText(rek);
 
-// isi data ke elemen
-function renderData(){
-bankName.textContent = DATA.bank
-accNumber.textContent = DATA.displayAccount()
-// juga tampilkan nama penerima jika mau
-const nameEl = document.querySelector('.acc-name')
-if(nameEl) nameEl.textContent = DATA.holder
-}
-renderData()
-
-
-// toggle reveal
-let open = false
-giftBtn.addEventListener('click', ()=>{
-open = !open
-giftBtn.setAttribute('aria-expanded', String(open))
-reveal.classList.toggle('open', open)
-reveal.setAttribute('aria-hidden', String(!open))
-// scroll ke kartu (berguna di layar kecil)
-if(open) setTimeout(()=>{ document.querySelector('.atm-card').scrollIntoView({behavior:'smooth',block:'center'}) },220)
-})
-
-
-// salin nomor rekening ke clipboard (tanpa spasi)
-copyBtn.addEventListener('click', async ()=>{
-try{
-await navigator.clipboard.writeText(DATA.account)
-copyBtn.textContent = 'Tersalin ✓'
-setTimeout(()=> copyBtn.textContent = 'Salin',1500)
-}catch(e){
-// fallback: seleksi teks dan beri instruksi
-const range = document.createRange()
-range.selectNodeContents(accNumber)
-const sel = window.getSelection()
-sel.removeAllRanges(); sel.addRange(range)
-document.execCommand('copy')
-copyBtn.textContent = 'Tersalin ✓'
-setTimeout(()=> copyBtn.textContent = 'Salin',1500)
-}
-})
-
-
-// Jika ingin mengganti data dari URL (opsional) — contoh: ?bank=BCA&acc=987654321&name=Eka
-function readFromUrl(){
-const params = new URLSearchParams(location.search)
-if(params.get('bank')) DATA.bank = params.get('bank')
-if(params.get('acc')) DATA.account = params.get('acc')
-if(params.get('name')) DATA.holder = params.get('name')
-renderData()
-}
-readFromUrl()
+    alert("Nomor rekening disalin!");
+  }
   // ============================================================
   // === NAMA TAMU DARI URL ===
   // ============================================================
