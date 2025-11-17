@@ -1407,37 +1407,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  // BUKA GIFT
   // === TOMBOL BUKA GIFT ===
-  document.getElementById("openGiftBtn").addEventListener("click", function () {
-    const card = document.getElementById("atmCard");
+document.getElementById("openGiftBtn").addEventListener("click", function () {
+  const card = document.getElementById("atmCard");
 
-    // munculkan kartu
-    card.classList.remove("hidden");
-    setTimeout(() => {
-      card.classList.add("show");
-    }, 50);
+  // munculkan kartu
+  card.classList.remove("hidden");
+  setTimeout(() => {
+    card.classList.add("show");
+  }, 50);
 
-    // sembunyikan tombol buka gift
-    this.style.display = "none";
-  });
+  // sembunyikan tombol buka gift
+  this.style.display = "none";
+});
 
-  // === FIX TOMBOL SALIN ===
-  // Memastikan tombol bisa diklik meskipun ada animasi-scroll
-  window.addEventListener("DOMContentLoaded", () => {
-    const copyBtn = document.querySelector(".copy-btn");
-    if (copyBtn) {
-      copyBtn.style.pointerEvents = "auto";
-      copyBtn.style.zIndex = "99999";
-      copyBtn.style.position = "relative";
-    }
-  });
+// === FIX CLICK BUTTON SALIN ===
+window.addEventListener("DOMContentLoaded", () => {
+  const copyBtn = document.querySelector(".copy-btn");
+  if (copyBtn) {
+    copyBtn.style.pointerEvents = "auto";
+    copyBtn.style.zIndex = "99999";
+    copyBtn.style.position = "relative";
 
-  // === SALIN NOMOR REKENING ===
-  function copyRek() {
+    // wajib! supaya klik memanggil fungsinya
+    copyBtn.addEventListener("click", copyRek);
+  }
+});
+
+// === SALIN NOMOR REKENING ===
+function copyRek() {
   const nomor = document.getElementById("nomorRek").textContent.trim();
 
-  // Jika HTTPS, pakai Clipboard API
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(nomor)
       .then(() => {
@@ -1447,7 +1447,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fallbackCopy(nomor);
       });
   } else {
-    // Jika bukan HTTPS, pakai fallback (pasti berhasil)
     fallbackCopy(nomor);
   }
 }
@@ -1464,7 +1463,8 @@ function fallbackCopy(text) {
   textarea.remove();
 
   alert("Nomor rekening berhasil disalin:\n" + text);
-  }
+}
+
   // ============================================================
   // === NAMA TAMU DARI URL ===
   // ============================================================
