@@ -257,6 +257,24 @@
     transform: translateY(0);
   }
       }
+
+    .slideshow {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: visible; /* halaman tetap bisa scroll */
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
 
@@ -1243,23 +1261,12 @@
 
 
     <!-- ISI -->
-<!-- Bagian slideshow -->
+<!-- Bagian slideshow diganti video fullscreen -->
 <div class="slideshow">
-<div class="slide slide1"></div>
-<div class="slide slide2"></div>
-<!-- ✨ Tambahkan efek hujan di sini -->
-<div class="black-overlay"></div>
-<!-- Konten nama pengantin -->
-<div class="content-wrapper">
-<div class="nama-wrapper" id="hero-nama">
-<div class="nama">
-<div>Arifa & Maulana</div>
-</div>
-<div class="guest">
-<div>27 Desember 2025</div>
-</div>
-</div>
-</div>
+  <video class="background-video" autoplay muted playsinline 
+         onended="this.pause(); this.currentTime=this.duration;">
+    <source src="video.mp4" type="video/mp4">
+  </video>
 </div>
   
 <section id="invitation1" section class="invitation1" style="position: relative;">
