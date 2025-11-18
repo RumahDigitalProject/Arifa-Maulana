@@ -812,13 +812,16 @@
 /* === UCAPAN TERIMA KASIH === */
 #ucapan {
   background-image: url('dasar.webp');
-  background-size: cover;
-  background-position: center;
+  /* Lebar mengikuti elemen, tinggi proporsional */
+  background-size: 100% auto;  
+  background-repeat: repeat-y;   /* Ulangi ke bawah */
+  background-position: top center;
   padding: 80px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .ucapan-box {
   background: white;
   padding: 40px 30px 80px;
