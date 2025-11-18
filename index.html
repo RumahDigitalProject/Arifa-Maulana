@@ -29,13 +29,13 @@
   height: 100vh;
   background: url('foto3.webp') center/cover no-repeat;
   display: flex;
-  justify-content: flex-start; /* mulai dari atas */
-  align-items: center;
   flex-direction: column;
+  justify-content: space-between; /* konten atas di atas, konten bawah di bawah */
+  align-items: center;
   text-align: center;
   color: white;
   transition: opacity 1s ease;
-  padding-top: 60px; /* jarak dari atas layar */
+  padding: 60px 20px; /* jarak atas dan bawah layar */
 }
 
 /* Overlay gelap */
@@ -47,43 +47,48 @@
   z-index: 1;
 }
 
-/* Konten cover */
-#cover-content {
+/* Konten atas (title & names) */
+#cover-content.top {
   position: relative;
   z-index: 2;
-  padding: 0 20px; /* padding horizontal tetap */
-  margin-top: 0; /* hapus margin-top besar */
   animation: fadeInUp 1.5s ease;
 }
 
-/* Title dan Names */
-#cover-content .title {
+#cover-content.top .title {
   font-size: 1.2em;
-  margin-bottom: 10px; /* rapat ke names */
+  margin-bottom: 10px;
   letter-spacing: 2px;
 }
 
-#cover-content .names {
+#cover-content.top .names {
   font-size: 2.5em;
   font-weight: bold;
-  margin-bottom: 25px;
 }
 
-/* Nama tamu */
-.nama-tamu {
+/* Konten bawah (guest, nama tamu, tombol, catatan) */
+#cover-content.bottom {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1.5s ease;
+}
+
+#cover-content.bottom .guest {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+#cover-content.bottom .nama-tamu {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   color: #fff;
-  margin-top: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: capitalize;
   transition: opacity 0.5s ease;
 }
 
-/* Jika tidak ada nama tamu, sembunyikan */
-.nama-tamu.hidden {
+#cover-content.bottom .nama-tamu.hidden {
   opacity: 0;
   height: 0;
   margin: 0;
@@ -91,21 +96,7 @@
   overflow: hidden;
 }
 
-/* Guest info */
-#cover-content .guest {
-  font-size: 1.0em;
-  margin-bottom: 15px;
-  margin-top: 25px;
-}
-
-#cover-content .guest1 {
-  font-size: 0.7em;
-  margin-top: 20px;
-  font-style: italic;
-}
-
-/* Button buka undangan */
-.btn-open {
+#cover-content.bottom .btn-open {
   padding: 14px 40px;
   font-size: 1.1em;
   border: none;
@@ -116,17 +107,24 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 15px;
   transition: all 0.3s;
 }
 
-.btn-open:hover {
+#cover-content.bottom .btn-open:hover {
   background: #f2f2f2;
   transform: scale(1.05);
 }
 
-.btn-open i {
+#cover-content.bottom .btn-open i {
   color: #b76e79;
   font-size: 1.2em;
+}
+
+#cover-content.bottom .guest1 {
+  font-size: 0.7em;
+  font-style: italic;
+  margin-bottom: 0;
 }
 
 /* Animasi masuk */
@@ -134,6 +132,7 @@
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 
 
     /* HALAMAN ISI */
@@ -1185,21 +1184,24 @@
 </head>
 <body>
 
-<!-- COVER -->
 <div id="cover">
-  <div id="cover-content">
+  <!-- Konten atas -->
+  <div id="cover-content" class="top">
     <p class="title">The Wedding of</p>
     <h1 class="names">Arifa & Maulana</h1>
+  </div>
 
+  <!-- Konten bawah -->
+  <div id="cover-content" class="bottom">
     <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <h3 id="namaTamu" class="nama-tamu"></h3> <!-- 🪶 Nama tamu muncul di sini -->
-
+    <h3 id="namaTamu" class="nama-tamu"></h3>
     <button class="btn-open" id="openBtn">
       <i class="fa-solid fa-envelope"></i> Buka Undangan
     </button>
     <p class="guest1">mohon maaf apabila ada salah penulisan nama/gelar/dsb</p>
   </div>
 </div>
+
 
 
     <!-- ISI -->
