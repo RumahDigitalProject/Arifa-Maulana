@@ -151,18 +151,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* memastikan gradient animasi tetap utuh */
+  overflow: hidden; /* memastikan gradient tidak terpotong */
+  color: white;
+
+  /* Gradient 3 warna gelap */
   background: linear-gradient(
-    135deg,
-    #1a1f3c,   /* biru gelap utama */
-    #101533,   /* biru lebih gelap */
-    #000000,   /* hitam pekat */
-    #1a1f3c,   /* biru gelap kembali */
-    rgba(255, 255, 255, 0.15) /* kilau putih tipis */
+    45deg,
+    #1a1f3c,           /* biru gelap */
+    #000000,           /* hitam */
+    #2e2c44            /* abu keunguan gelap */
   );
-  background-size: 300% 300%;
-background-size: 300% 300%;
-  animation: premiumMove 6s ease infinite;
+  background-size: 200% 200%;
+  animation: premiumMove 20s ease infinite;
 }
 
 
