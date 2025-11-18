@@ -689,6 +689,7 @@
     font-size: 2.2em;
   }
 }
+
 /* Lightbox */
 .lightbox {
   display: none;
@@ -699,31 +700,9 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px); /* efek blur background */
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-}
-
-.lightbox-top {
-  width: 90%;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-family: 'Arial', sans-serif;
-  z-index: 1010; /* pastikan di atas gambar */
-}
-
-.lightbox-counter {
-  font-size: 16px;
-  font-weight: 500;
-  background: rgba(0,0,0,0.3);
-  padding: 5px 10px;
-  border-radius: 12px;
 }
 
 .lightbox-img {
@@ -734,51 +713,35 @@
   transition: transform 0.4s ease;
 }
 
-/* Tombol Close diperbaiki */
 .close {
-  position: absolute;       /* langsung relatif ke lightbox */
-  top: 20px;
-  right: 30px;
-  font-size: 30px;
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
   cursor: pointer;
-  padding: 8px 12px;       /* area klik lebih besar */
-  border-radius: 8px;
-  background: rgba(0,0,0,0.3);
-  transition: color 0.3s, background 0.3s;
-  z-index: 1015;            /* selalu di atas gambar dan counter */
-  pointer-events: auto;     /* pastikan bisa diklik */
 }
 
-.close:hover {
-  color: black;
-  background: #ffcc00;
-}
-
-
-/* Tombol navigasi kiri/kanan cantik */
 .prev, .next {
   position: absolute;
   top: 50%;
   color: white;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 8px 12px;
+  font-size: 50px;
+  padding: 10px;
   cursor: pointer;
   user-select: none;
   transform: translateY(-50%);
-  border-radius: 50%;
-  background: rgba(0,0,0,0.3);
-  transition: background 0.3s, color 0.3s;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.prev:hover, .next:hover {
-  background: rgba(255,204,0,0.7);
-  color: black;
+.prev { left: 30px; }
+.next { right: 30px; }
+
+.prev:hover, .next:hover, .close:hover {
+  color: #ffcc00;
 }
-
-.prev { left: 20px; }
-.next { right: 20px; }
-
 
 
 
@@ -1357,13 +1320,7 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox">
-  <!-- Tombol close di atas semua -->
   <span class="close">&times;</span>
-
-  <div class="lightbox-top">
-    <span class="lightbox-counter">1 / 6</span>
-  </div>
-
   <img class="lightbox-img" src="">
   <a class="prev">&#10094;</a>
   <a class="next">&#10095;</a>
@@ -1660,43 +1617,33 @@ const lightboxImg = document.querySelector('.lightbox-img');
 const closeBtn = document.querySelector('.close');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
-const counter = document.querySelector('.lightbox-counter');
 
 let currentIndex = 0;
-
-// Fungsi update gambar & counter
-function updateLightbox(index) {
-  lightboxImg.src = galeriItems[index].src;
-  counter.textContent = `${index + 1} / ${galeriItems.length}`;
-}
 
 // Buka lightbox saat gambar diklik
 galeriItems.forEach((img, index) => {
   img.addEventListener('click', () => {
     lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
     currentIndex = index;
-    updateLightbox(currentIndex);
   });
 });
 
 // Tutup lightbox
-closeBtn.addEventListener('click', (e) => {
-  e.stopPropagation();       // cegah event bubbling ke lightbox
+closeBtn.addEventListener('click', () => {
   lightbox.style.display = 'none';
 });
 
 // Navigasi sebelumnya
-prevBtn.addEventListener('click', (e) => {
-  e.stopPropagation();       // cegah event bubbling
+prevBtn.addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + galeriItems.length) % galeriItems.length;
-  updateLightbox(currentIndex);
+  lightboxImg.src = galeriItems[currentIndex].src;
 });
 
 // Navigasi selanjutnya
-nextBtn.addEventListener('click', (e) => {
-  e.stopPropagation();       // cegah event bubbling
+nextBtn.addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % galeriItems.length;
-  updateLightbox(currentIndex);
+  lightboxImg.src = galeriItems[currentIndex].src;
 });
 
 // Tutup lightbox kalau klik di luar gambar
