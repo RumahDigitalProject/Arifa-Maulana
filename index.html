@@ -1517,11 +1517,11 @@ function fallbackCopy(text) {
   window.addEventListener("beforeunload", () => safePause());
 
 
-  // ============================================================
+    // ============================================================
   // === COUNTDOWN ACARA ===
   // ============================================================
-    function countdown() {
-    const target = new Date(2025, 11, 27, 9, 0, 0).getTime();
+  function countdown() {
+    const target = new Date(2025, 11, 10, 8, 0, 0).getTime();
     const diff = target - Date.now();
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -1542,21 +1542,6 @@ function fallbackCopy(text) {
   }
   const timer = setInterval(countdown, 1000);
   countdown();
-
-  // === Slideshow background ===
-  const slides = document.querySelectorAll('.bg-slideshow img');
-  let current = 0;
-
-  function showNextSlide() {
-    slides.forEach((img, index) => {
-      img.classList.remove('active'); // sembunyikan semua
-    });
-    current = (current + 1) % slides.length; // pindah ke slide berikut
-    slides[current].classList.add('active'); // tampilkan slide baru
-  }
-
-  slides[0].classList.add('active'); // mulai dengan slide pertama
-  setInterval(showNextSlide, 4000); // ganti tiap 4 detik
 
 
   // ============================================================
