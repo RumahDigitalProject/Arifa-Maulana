@@ -128,7 +128,7 @@
   font-size: 32px;  /* ukuran panah */
   left: 50%;
   transform: translateX(-50%);
-  bottom: 165px; /* sesuaikan dengan posisi oval di video */
+  bottom: 175px; /* sesuaikan dengan posisi oval di video */
   opacity: 0; /* awalnya disembunyikan */
   animation: bounce 1s infinite alternate;
   pointer-events: none; /* agar panah tidak menghalangi klik */
@@ -145,19 +145,24 @@
 
     /* KONTEN */
     .invitation1 {
-  padding-top: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 40px;
-  background: linear-gradient(135deg, #1a1f3c, #000);
-  background-size: cover;
-  background-attachment: fixed; /* 🎯 INI YANG BIKIN BACKGROUND DIAM */
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 1;
+  
+  background: linear-gradient(135deg, #0f1c3f, #1a2a55, #0a0a0a, #1a2a55, #0f1c3f);
+  background-size: 300% 300%;
+  animation: premiumMove 20s ease infinite;
 }
+
+@keyframes premiumMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
     .bismillah {
       text-align: center;
