@@ -825,6 +825,12 @@
 
 .ucapan-box {
   background-image: url('dasar.png');
+
+  /* Background tidak nge-zoom, diulang jika kurang menutupi */
+  background-size: auto;       /* tetap ukuran asli gambar */
+  background-repeat: repeat;   /* ulangi horizontal & vertikal */
+  background-position: top center; /* mulai dari atas, horizontal di tengah */
+
   padding: 40px 30px 80px;
   max-width: 500px;
   text-align: center;
