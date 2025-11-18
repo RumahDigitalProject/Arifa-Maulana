@@ -29,13 +29,13 @@
   height: 100vh;
   background: url('foto3.webp') center/cover no-repeat;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* konten atas di atas, konten bawah di bawah */
+  justify-content: flex-start; /* mulai dari atas */
   align-items: center;
+  flex-direction: column;
   text-align: center;
   color: white;
   transition: opacity 1s ease;
-  padding: 60px 20px; /* jarak atas dan bawah layar */
+  padding-top: 60px; /* jarak dari atas layar */
 }
 
 /* Overlay gelap */
@@ -47,48 +47,43 @@
   z-index: 1;
 }
 
-/* Konten atas (title & names) */
-#cover-content.top {
+/* Konten cover */
+#cover-content {
   position: relative;
   z-index: 2;
+  padding: 0 20px; /* padding horizontal tetap */
+  margin-top: 0; /* hapus margin-top besar */
   animation: fadeInUp 1.5s ease;
 }
 
-#cover-content.top .title {
+/* Title dan Names */
+#cover-content .title {
   font-size: 1.2em;
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* rapat ke names */
   letter-spacing: 2px;
 }
 
-#cover-content.top .names {
+#cover-content .names {
   font-size: 2.5em;
   font-weight: bold;
+  margin-bottom: 25px;
 }
 
-/* Konten bawah (guest, nama tamu, tombol, catatan) */
-#cover-content.bottom {
-  position: relative;
-  z-index: 2;
-  animation: fadeInUp 1.5s ease;
-}
-
-#cover-content.bottom .guest {
-  font-size: 1em;
-  margin-bottom: 10px;
-}
-
-#cover-content.bottom .nama-tamu {
+/* Nama tamu */
+.nama-tamu {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   color: #fff;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 25px;
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: capitalize;
   transition: opacity 0.5s ease;
 }
 
-#cover-content.bottom .nama-tamu.hidden {
+/* Jika tidak ada nama tamu, sembunyikan */
+.nama-tamu.hidden {
   opacity: 0;
   height: 0;
   margin: 0;
@@ -96,7 +91,21 @@
   overflow: hidden;
 }
 
-#cover-content.bottom .btn-open {
+/* Guest info */
+#cover-content .guest {
+  font-size: 1.0em;
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+#cover-content .guest1 {
+  font-size: 0.7em;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Button buka undangan */
+.btn-open {
   padding: 14px 40px;
   font-size: 1.1em;
   border: none;
@@ -107,24 +116,17 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 15px;
   transition: all 0.3s;
 }
 
-#cover-content.bottom .btn-open:hover {
+.btn-open:hover {
   background: #f2f2f2;
   transform: scale(1.05);
 }
 
-#cover-content.bottom .btn-open i {
+.btn-open i {
   color: #b76e79;
   font-size: 1.2em;
-}
-
-#cover-content.bottom .guest1 {
-  font-size: 0.7em;
-  font-style: italic;
-  margin-bottom: 0;
 }
 
 /* Animasi masuk */
@@ -132,7 +134,6 @@
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 
 
     /* HALAMAN ISI */
@@ -339,7 +340,31 @@
   padding: 60px 0;
   overflow: hidden;
   height: 100vh; /* Full screen */
-  background: url('waktu.webp') center/cover no-repeat; /* background foto biasa */
+}
+
+/* === BACKGROUND SLIDESHOW === */
+.bg-slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bg-slideshow img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* foto penuh */
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.bg-slideshow img.active {
+  opacity: 1;
 }
 
 /* Overlay hitam */
@@ -371,6 +396,7 @@
   margin-bottom: 15px;
   font-size: 1.1rem;
 }
+
 
 /* ================= COUNTDOWN LAMA ================= */
 #countdown {
@@ -428,7 +454,6 @@
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
   margin-bottom: 20px;
 }
-
 
 
 
@@ -1160,24 +1185,21 @@
 </head>
 <body>
 
+<!-- COVER -->
 <div id="cover">
-  <!-- Konten atas -->
-  <div id="cover-content" class="top">
+  <div id="cover-content">
     <p class="title">The Wedding of</p>
     <h1 class="names">Arifa & Maulana</h1>
-  </div>
 
-  <!-- Konten bawah -->
-  <div id="cover-content" class="bottom">
     <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <h3 id="namaTamu" class="nama-tamu"></h3>
+    <h3 id="namaTamu" class="nama-tamu"></h3> <!-- 🪶 Nama tamu muncul di sini -->
+
     <button class="btn-open" id="openBtn">
       <i class="fa-solid fa-envelope"></i> Buka Undangan
     </button>
     <p class="guest1">mohon maaf apabila ada salah penulisan nama/gelar/dsb</p>
   </div>
 </div>
-
 
 
     <!-- ISI -->
@@ -1251,6 +1273,12 @@
 
 <!-- === COUNTDOWN ACARA === -->
 <section id="countdown-section" class="countdown-section">
+  <!-- Background slideshow -->
+  <div class="bg-slideshow">
+    <img src="foto7.webp" alt="Foto 1">
+    <img src="foto3.webp" alt="Foto 2">
+  </div>
+
   <!-- Overlay hitam -->
   <div class="overlay"></div>
 
@@ -1268,7 +1296,6 @@
     <p class="tgl animasi-scroll" data-anim="down">27 Desember 2025</p>
   </div>
 </section>
-
 
 
 
@@ -1316,14 +1343,21 @@
     </div>
     <!-- Foto 2 & 3 -->
     <div class="galeri-item small animasi-scroll" data-anim="left">
-      <img alt="Galeri Foto 5" src="foto5.webp"/>
+      <img alt="Galeri Foto 2" src="foto2.webp"/>
     </div>
     <div class="galeri-item small animasi-scroll" data-anim="right">
-      <img alt="Galeri Foto 4" src="foto3.webp"/>
+      <img alt="Galeri Foto 3" src="foto3.webp"/>
     </div>
     <!-- Foto 4 Besar -->
     <div class="galeri-item large animasi-scroll" data-anim="up">
-      <img alt="Galeri Foto 2" src="foto4.webp"/>
+      <img alt="Galeri Foto 4" src="foto4.webp"/>
+    </div>
+    <!-- Foto 5 & 6 -->
+    <div class="galeri-item small animasi-scroll" data-anim="left">
+      <img alt="Galeri Foto 5" src="foto5.webp"/>
+    </div>
+    <div class="galeri-item small animasi-scroll" data-anim="right">
+      <img alt="Galeri Foto 6" src="foto6.webp"/>
     </div>
   </div>
 </section>
@@ -1419,12 +1453,12 @@
   <div class="ucapan-box animasi-scroll">
     <!-- Bagian Penutup -->
     <div class="pengantin animasi-scroll" data-anim="zoom-up">
-      <img alt="Pengantin Perempuan" class="foto" src="foto5.webp" loading="lazy"/>
+      <img alt="Pengantin Perempuan" class="foto" src="foto1.webp" loading="lazy"/>
       <p class="ucapan-teks animasi-scroll" data-anim="zoom-up">
         Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih..
       </p>
       <p class="ucapan-nama animasi-scroll" data-anim="zoom-up">
-        Bapak Kaswan & Umi Masruroh<br>
+        Bapak Kaswan & Ibu Masruroh<br>
         Sekeluarga
       </p>
     </div>
