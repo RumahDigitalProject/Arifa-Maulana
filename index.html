@@ -122,6 +122,23 @@
   object-fit: cover; /* video menutupi area */
   z-index: 0;
 }
+.scroll-arrow {
+  position: absolute;
+  color: white;
+  font-size: 32px;  /* ukuran panah */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 80px; /* sesuaikan dengan posisi oval di video */
+  opacity: 0; /* awalnya disembunyikan */
+  animation: bounce 1s infinite alternate;
+  pointer-events: none; /* agar panah tidak menghalangi klik */
+}
+
+/* Animasi panah bergerak naik-turun */
+@keyframes bounce {
+  from { transform: translateX(-50%) translateY(0); }
+  to { transform: translateX(-50%) translateY(15px); }
+}
 
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
@@ -1111,12 +1128,17 @@
     <!-- ISI -->
 <!-- Bagian slideshow diganti video fullscreen -->
 <div class="slideshow">
-    <video class="background-video" autoplay muted playsinline 
-           onended="this.pause(); this.currentTime=this.duration;">
-      <source src="video.mp4" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
+  <video class="background-video" autoplay muted playsinline 
+         onended="this.pause(); this.currentTime=this.duration;">
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <!-- Panah animasi -->
+  <div class="scroll-arrow" id="scrollArrow">
+    &#8595; <!-- panah bawah, bisa diganti icon SVG -->
+  </div>
 </div>
+
   
 <section id="invitation1" section class="invitation1" style="position: relative;">
 <div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
@@ -1391,6 +1413,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
 
+
+
+  
+const video = document.querySelector(".background-video");
+const arrow = document.getElementById("scrollArrow");
+
+// Munculkan panah ketika video sudah di detik ke-7
+video.addEventListener("timeupdate", () => {
+  if(video.currentTime >= 7) {
+    arrow.style.opacity = 1;
+  }
+});
+
+
+
+  
   // ============================================================
   // === GIFT ===
   // ============================================================
