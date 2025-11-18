@@ -436,12 +436,25 @@
   z-index: 2;
 }
 
-/* Countdown content di depan overlay */
+/* Countdown content di bagian bawah */
 .countdown-content {
-  position: relative;
+  position: absolute;
+  bottom: 50px; /* jarak dari bawah section */
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 3;
   color: #fff;
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* optional, biar countdown tidak terlalu lebar */
 }
+
+/* Jika ingin teks atas countdown sedikit lebih kecil */
+.countdown-content .tgl:first-child {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
 
 /* ================= COUNTDOWN LAMA ================= */
 #countdown {
