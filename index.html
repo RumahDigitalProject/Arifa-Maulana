@@ -152,8 +152,16 @@
   justify-content: center;
   align-items: center;
   overflow: hidden; /* memastikan gradient animasi tetap utuh */
-  background: linear-gradient(135deg, #1a1f3c, #000);
+  background: linear-gradient(
+    135deg,
+    #1a1f3c,   /* biru gelap utama */
+    #101533,   /* biru lebih gelap */
+    #000000,   /* hitam pekat */
+    #1a1f3c,   /* biru gelap kembali */
+    rgba(255, 255, 255, 0.15) /* kilau putih tipis */
+  );
   background-size: 300% 300%;
+background-size: 300% 300%;
   animation: premiumMove 6s ease infinite;
 }
 
