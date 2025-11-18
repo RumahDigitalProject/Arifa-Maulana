@@ -832,11 +832,13 @@
   background-size: cover;
   background-attachment: fixed; /* background diam saat scroll */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
   position: relative; /* penting untuk overlay */
   z-index: 1;
   border-radius: 40px 40px 80px 80px; /* bagian bawah melengkung */
+  text-align: center; /* teks di dalam center */
+  flex-direction: column; /* supaya anak elemen stack ke bawah */
 }
 .ucapan-teks {
   font-family: 'Poppins', sans-serif;
