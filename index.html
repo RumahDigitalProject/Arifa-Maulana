@@ -392,6 +392,26 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+    position: relative; /* wajib untuk overlay */
+  overflow: hidden;   /* biar overlay tetap di dalam */
+}
+
+/* Overlay putih */
+.box-acara::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.55); /* 🔥 tingkat transparansi */
+  z-index: 1; 
+}
+
+/* Supaya tulisan muncul di atas overlay */
+.box-acara > * {
+  position: relative;
+  z-index: 2;
 }
 /* Media query agar tidak mepet di HP kecil */
 @media (max-width: 480px) {
