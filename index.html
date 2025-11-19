@@ -91,55 +91,52 @@
     .btn-open:hover { background: #f2f2f2; transform: scale(1.05); }
     .btn-open i { color: #b76e79; font-size: 1.2em; }
 
-    /* ANIMASI MASUK */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* HALAMAN ISI */
+#invitation { 
+  display: none;
+  animation: fadeIn 1.5s ease forwards;
+  will-change: transform, opacity;
+}
 
-
-    /* HALAMAN ISI */
-    #invitation { 
-      display: none;
-      animation: fadeIn 1.5s ease forwards;
-      will-change: transform, opacity;
-    }
-
-    /* Container utama slideshow */
-
-    .slideshow {
+/* Container utama slideshow */
+.slideshow {
   position: relative;
   height: 100vh;
   width: 100%;
   overflow: visible; /* halaman tetap bisa scroll */
 }
 
-.background-video {
+/* GANTI VIDEO MENJADI FOTO */
+.background-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* video menutupi area */
+  object-fit: cover;        /* agar foto full tanpa distorsi */
+  object-position: center;  /* fokus tengah foto */
   z-index: 0;
 }
+
+/* Panah scroll */
 .scroll-arrow {
   position: absolute;
   color: white;
   font-size: 32px;  /* ukuran panah */
   left: 50%;
   transform: translateX(-50%);
-  bottom: 175px; /* sesuaikan dengan posisi oval di video */
+  bottom: 175px; /* sesuaikan dengan posisi oval */
   opacity: 0; /* awalnya disembunyikan */
   animation: bounce 1s infinite alternate;
   pointer-events: none; /* agar panah tidak menghalangi klik */
 }
 
-/* Animasi panah bergerak naik-turun */
+/* Animasi panah */
 @keyframes bounce {
   from { transform: translateX(-50%) translateY(0); }
-  to { transform: translateX(-50%) translateY(15px); }
+  to   { transform: translateX(-50%) translateY(15px); }
 }
+
 
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
@@ -1109,18 +1106,14 @@
 </div>
 
     <!-- ISI -->
-<!-- Bagian slideshow diganti video fullscreen -->
 <div class="slideshow">
-  <video class="background-video" autoplay muted playsinline 
-         onended="this.pause(); this.currentTime=this.duration;">
-    <source src="video1.mp4" type="video/mp4">
-  </video>
+  <img src="foto12.png" class="background-image" alt="background">
 
-  <!-- Panah animasi -->
   <div class="scroll-arrow" id="scrollArrow">
-    &#8595; <!-- panah bawah, bisa diganti icon SVG -->
+    &#8595;
   </div>
 </div>
+
 
   
 <section id="invitation1" section class="invitation1" style="position: relative;">
