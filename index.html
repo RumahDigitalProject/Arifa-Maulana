@@ -144,35 +144,40 @@
   overflow: hidden; /* burung tidak keluar area */
 }
 
-/* Container burung */
+/* CONTAINER: hanya di area .slideshow */
+.slideshow { position: relative; overflow: hidden; }
+
+/* wrapper burung */
 #flying-birds {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5; /* di atas background, di bawah teks */
+  inset: 0;                /* fill .slideshow */
+  pointer-events: none;    /* jangan ganggu klik */
+  z-index: 6;              /* di atas background, bisa sesuaikan */
 }
 
-/* Burung */
+/* setiap burung absolute */
 .bird {
   position: absolute;
-  color: black;
-  font-size: 10px;
-  opacity: 0.8;
-  animation: fly linear infinite;
+  transform-origin: center;
+  will-change: transform, left, top;
 }
 
-/* Burung terbang dari kiri ke kanan */
-@keyframes fly {
-  0% {
-    transform: translateX(-10vw) translateY(0) scale(1);
-  }
-  100% {
-    transform: translateX(110vw) translateY(-10vh) scale(1.2);
-  }
+/* basic SVG sizing (ukuran akan di-set inline oleh JS) */
+.bird svg { display:block; }
+
+/* animasi kepak sayap (CSS) - lakukan pada elemen .wing */
+@keyframes flap {
+  0%   { transform: rotate(0deg); }
+  40%  { transform: rotate(-28deg); } /* sayap turun */
+  60%  { transform: rotate(12deg); }  /* sayap naik */
+  100% { transform: rotate(0deg); }
 }
+
+/* support prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .wing { animation: none !important; }
+}
+
 
     
     /* BACKGROUND KHUSUS HANYA UNTUK BAGIAN BISMILLAH SAMPAI PENGANTIN */
@@ -1145,8 +1150,9 @@
 <div class="slideshow">
   <img src="foto12.png" class="background-image" alt="background">
 
-  <!-- burung terbang hanya di area ini -->
-  <div id="flying-birds"></div>
+  <!-- di dalam .slideshow -->
+<div id="flying-birds" aria-hidden="true"></div>
+
 
   <div class="scroll-arrow" id="scrollArrow">
     &#8595;
@@ -1596,35 +1602,189 @@ function fallbackCopy(text) {
 
 
 
-function spawnBirds() {
-  const container = document.getElementById("flying-birds");
 
-  for (let i = 0; i < 6; i++) { // jumlah burung
-    let bird = document.createElement("div");
-    bird.classList.add("bird");
+(() => {
+  const CONTAINER_ID = "flying-birds";
+  const NUM_BIRDS = 7; // jumlah burung, ubah kalau mau lebih/kurang
+  const container = document.getElementById(CONTAINER_ID);
+  if (!container) return;
 
-    // bentuk burung kecil (seperti di contoh)
-    bird.innerHTML = "V"; 
-    // Kalau mau SVG siluet burung, bilang ya.
-
-    // posisi awal acak
-    bird.style.top = Math.random() * 50 + "vh";
-    bird.style.left = Math.random() * 100 + "vw";
-
-    // ukuran acak
-    bird.style.fontSize = (8 + Math.random() * 8) + "px";
-
-    // durasi terbang acak
-    bird.style.animationDuration = (5 + Math.random() * 8) + "s";
-
-    // delay acak agar tidak start barengan
-    bird.style.animationDelay = Math.random() * 5 + "s";
-
-    container.appendChild(bird);
+  // SVG template: badan + 2 sayap (kiri & kanan). 
+  // Kita beri class .wing-left dan .wing-right untuk animasi.
+  function createBirdSVG(color = "#111") {
+    return `
+      <svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- badan -->
+        <ellipse cx="60" cy="44" rx="10" ry="7" fill="${color}" />
+        <!-- kepala -->
+        <circle cx="74" cy="38" r="6" fill="${color}" />
+        <!-- paruh -->
+        <polygon points="80,38 88,35 88,41" fill="${color}" />
+        <!-- sayap kiri (pivot di ~50,40) -->
+        <g class="wing wing-left" style="transform-origin:50px 40px;">
+          <path d="M50 40 Q28 20 10 34 Q28 46 50 40" fill="${color}" />
+        </g>
+        <!-- sayap kanan (pivot di ~70,40) -->
+        <g class="wing wing-right" style="transform-origin:70px 40px;">
+          <path d="M70 40 Q92 20 110 34 Q92 46 70 40" fill="${color}" />
+        </g>
+        <!-- ekor -->
+        <path d="M46 46 L36 42 L36 50 Z" fill="${color}" />
+      </svg>`;
   }
-}
 
-spawnBirds();
+  // object bird: posisi, kecepatan, amplitude gerak vertikal, flip, dsb
+  class Bird {
+    constructor(i) {
+      this.el = document.createElement("div");
+      this.el.className = "bird";
+      // buat SVG kecil, warna hitam silhouette
+      this.el.innerHTML = createBirdSVG("#111");
+      container.appendChild(this.el);
+
+      // randomize properties
+      this.scale = (0.6 + Math.random() * 0.9); // ukuran
+      this.width = 120 * this.scale;
+      this.height = 80 * this.scale;
+
+      // posisi awal (sebar di area horizontal penuh)
+      const contW = container.clientWidth || window.innerWidth;
+      const contH = container.clientHeight || window.innerHeight;
+
+      // spawn di area vertikal bagian atas- tengah (20%..70% dari tinggi)
+      this.x = Math.random() * contW;
+      this.y = (0.18 + Math.random() * 0.5) * contH;
+
+      // arah: -1 = kiri, +1 = kanan
+      this.dir = Math.random() < 0.5 ? -1 : 1;
+
+      // kecepatan horizontal px/s
+      this.vx = (30 + Math.random() * 90) * (this.dir); 
+
+      // vertical sinus amplitude dan speed (untuk naik-turun halus)
+      this.amp = 8 + Math.random() * 32;
+      this.vyPhase = Math.random() * Math.PI * 2;
+      this.vySpeed = 0.6 + Math.random() * 1.4;
+
+      // flap speed (detik per cycle)
+      this.flapSpeed = 0.28 + Math.random() * 0.5;
+
+      // set styles initial
+      this.el.style.width = this.width + "px";
+      this.el.style.height = this.height + "px";
+      this.el.style.left = this.x + "px";
+      this.el.style.top = this.y + "px";
+      this.el.style.transform = `translate(-50%, -50%) scale(${this.scale}) rotate(0deg)`;
+
+      // apply CSS animation to wings by selecting inside svg
+      // note: we use inline style animation so each bird can have different speed
+      const wings = this.el.querySelectorAll(".wing");
+      wings.forEach((w, idx) => {
+        // opposite phase for left/right may look better; we can offset animation-delay
+        w.style.animation = `flap ${this.flapSpeed}s ease-in-out infinite`;
+        // small delay offset so left/right aren't perfectly synced
+        w.style.animationDelay = (idx === 0 ? "-" + (Math.random()*this.flapSpeed/2) + "s" : "-" + (Math.random()*this.flapSpeed/2) + "s");
+        // ensure transform box
+        w.style.transformOrigin = w.style.transformOrigin || "";
+      });
+
+      // small initial rotation
+      this.angle = (Math.random() * 20 - 10);
+      this.updateDOM();
+    }
+
+    update(dt) {
+      // horizontal movement
+      this.x += this.vx * dt;
+
+      // vertical sinus movement
+      this.vyPhase += dt * this.vySpeed;
+      this.y += Math.sin(this.vyPhase * Math.PI * 2) * this.amp * dt * 8;
+
+      // gentle tilt based on vertical velocity (visual)
+      const tilt = Math.max(-25, Math.min(25, Math.sin(this.vyPhase * Math.PI * 2) * 12));
+      this.angle = tilt + (this.vx > 0 ? 0 : 180); // rotate 180 if going left
+
+      // bounds check: keep inside container horizontally; if outside, wrap around smoothly
+      const W = container.clientWidth;
+      const H = container.clientHeight;
+      if (this.x < -this.width) this.x = W + this.width;
+      if (this.x > W + this.width) this.x = -this.width;
+
+      // clamp vertical between 5% and 75% of container
+      const minY = H * 0.06;
+      const maxY = H * 0.75;
+      if (this.y < minY) this.y = minY;
+      if (this.y > maxY) this.y = maxY;
+
+      this.updateDOM();
+    }
+
+    updateDOM() {
+      // position & rotation. translate(-50%,-50%) keeps center alignment
+      this.el.style.left = this.x + "px";
+      this.el.style.top = this.y + "px";
+      // rotate so wing motion still looks natural; if going left rotate 180deg
+      const r = (this.vx >= 0) ? 0 : 180;
+      // small tilt added
+      const tilt = Math.sin(this.vyPhase * Math.PI * 2) * 8;
+      this.el.style.transform = `translate(-50%, -50%) scale(${this.scale}) rotate(${r + tilt}deg)`;
+    }
+  }
+
+  // create birds
+  const birds = [];
+  function spawn(n = NUM_BIRDS) {
+    // cleanup old
+    container.innerHTML = "";
+    birds.length = 0;
+    for (let i = 0; i < n; i++) {
+      birds.push(new Bird(i));
+    }
+  }
+
+  // animation loop
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); // cap dt to avoid jumps
+    last = now;
+    for (const b of birds) b.update(dt);
+    requestAnimationFrame(loop);
+  }
+
+  // respawn on resize to recalc sizes/positions nicely
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // reposition birds to be inside new container nicely
+      for (const b of birds) {
+        b.x = Math.random() * (container.clientWidth || window.innerWidth);
+        b.y = (0.18 + Math.random() * 0.5) * (container.clientHeight || window.innerHeight);
+      }
+    }, 120);
+  });
+
+  // respect reduced motion: if user prefers reduced motion don't animate (only static silhouettes)
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    // simple static flock: just show V shapes without flap animation
+    for (let i = 0; i < NUM_BIRDS; i++) {
+      const d = document.createElement("div");
+      d.className = "bird";
+      d.innerHTML = `<svg viewBox="0 0 20 10" width="18" height="9" xmlns="http://www.w3.org/2000/svg"><path d="M1 5 Q6 0 10 5 Q6 3 1 5" fill="#111"/></svg>`;
+      d.style.left = Math.random() * 100 + "%";
+      d.style.top = (10 + Math.random()*60) + "%";
+      container.appendChild(d);
+    }
+    return;
+  }
+
+  // spawn and start
+  spawn(NUM_BIRDS);
+  requestAnimationFrame(loop);
+
+})();
 
 
 
