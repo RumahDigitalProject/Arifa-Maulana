@@ -1138,6 +1138,55 @@
 
 .hidden { display: none; }
 
+/* ====== KARTU HADIAH (KARTU KE 2) ====== */
+.gift-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 25px auto 0;
+  padding: 25px 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+  color: #fff;
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.5s ease;
+}
+
+.gift-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gift-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.gift-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffe9a8;
+  margin-bottom: 10px;
+}
+
+.gift-receiver {
+  font-size: 16px;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.gift-phone {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+
   </style>
 </head>
 <body>
@@ -1338,6 +1387,16 @@
 
       <button class="copy-btn" onclick="copyRek()">Salin</button>
     </div>
+<!-- KARTU KE 2: KIRIM HADIAH -->
+<div id="giftCard" class="gift-card hidden">
+
+  <div class="gift-icon">🎁</div>
+
+  <div class="gift-title">Kirim Hadiah</div>
+
+  <div class="gift-receiver">Penerima: Arifa Khamida Zuninda Putri</div>
+
+  <div class="gift-phone">0812-3456-7890</div>
 
   </div>
 </section>
@@ -1528,6 +1587,30 @@ function fallbackCopy(text) {
 
   alert("Nomor rekening berhasil disalin:\n" + text);
 }
+
+  // === TAMPILKAN KARTU KE 2 SETELAH KARTU PERTAMA ===
+document.getElementById("openGiftBtn").addEventListener("click", function () {
+  const card1 = document.getElementById("atmCard");
+  const card2 = document.getElementById("giftCard");
+
+  // tampilkan kartu 1
+  card1.classList.remove("hidden");
+  setTimeout(() => {
+    card1.classList.add("show");
+  }, 50);
+
+  // tampilkan kartu 2 sedikit terlambat biar elegan
+  setTimeout(() => {
+    card2.classList.remove("hidden");
+    setTimeout(() => {
+      card2.classList.add("show");
+    }, 50);
+  }, 600);
+
+  // sembunyikan tombol
+  this.style.display = "none";
+});
+
 
   // ============================================================
   // === NAMA TAMU DARI URL ===
