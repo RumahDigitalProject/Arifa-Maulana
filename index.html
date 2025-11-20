@@ -979,26 +979,44 @@
 }
 
 /* ====== GIFT WEDDING SECTION ====== */
-
+/* ====== GIFT SECTION ====== */
 #gift {
-  background: linear-gradient(135deg, #1a1f3c, #000);
-  background-image: url('dasar1.webp');
-  background-repeat: repeat-y;
-  background-size: contain;
-  background-position: top center;
+  position: relative;
+  overflow: hidden;
   padding: 60px 20px;
   text-align: center;
   color: #fff;
 
-  /* ❗ sebelum klik tombol → tingginya mengikuti isi */
+  /* Background awal nge-zoom */
+  background-image: url('dasar1.webp');
+  background-size: 220%;
+  background-position: center top;
+  background-repeat: no-repeat;
+
   min-height: auto;
 }
 
-/* Setelah tombol "Buka Gift" dipencet → full screen */
+/* Overlay yang nanti smooth fade-in */
+#gift::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('dasar1.webp');
+  background-size: contain;
+  background-position: top center;
+  background-repeat: repeat-y;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: -1;
+}
+
 #gift.full-bg {
   min-height: 100vh;
 }
 
+#gift.full-bg::after {
+  opacity: 1;
+}
 
 .GIFT-title {
   font-family: 'Great Vibes', cursive;
@@ -1528,12 +1546,13 @@ setTimeout(() => {
 
 
   
+
 // ============================================================
 // === GIFT ===
 // ============================================================
 document.getElementById("openGiftBtn").addEventListener("click", function () {
 
-  // 1. Jadikan background full setelah tombol ditekan
+  // === Tambahkan class yang akan memunculkan background full ===
   document.getElementById("gift").classList.add("full-bg");
 
   // 2. Ambil elemen kartu
