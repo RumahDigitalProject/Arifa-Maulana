@@ -21,27 +21,73 @@
     html, body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; background: #fff7f7; overflow-x: hidden; }
 
         /* COVER */
-    #cover {
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100%; height: 100vh;
-      background: url('awal.png') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      color: white;
-      transition: opacity 1s ease;
-    }
-    /* === NAMA TAMU DI COVER === */
+#cover {
+  position: fixed;
+  z-index: 9999;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background: url('awal.png') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  transition: opacity 1s ease;
+}
+
+#cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* --- STRUKTUR UTAMA COVER --- */
+#cover-content {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;              /* isi seluruh layar */
+  width: 100%;
+  padding: 40px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;   /* KUNCI TATA LETAK */
+}
+
+/* === BAGIAN ATAS (The Wedding of) === */
+#cover-content .title {
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  margin: 0;
+  margin-top: 20px;      /* atur jarak ke atas */
+}
+
+/* === TENGAH (Nama Pengantin) === */
+#cover-content .names {
+  font-size: 2.7em;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+/* === BAWAH (Tamu, tombol, catatan) === */
+.bottom-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* === NAMA TAMU DI COVER === */
 .nama-tamu {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
   color: #fff;
   margin-top: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: capitalize;
@@ -57,52 +103,43 @@
   overflow: hidden;
 }
 
-    #cover::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 1;
-    }
-    #cover-content {
-      position: relative;
-      z-index: 2;
-      padding: 20px;
-      margin-top: 200px;
-      animation: fadeInUp 1.5s ease;
-    }
-    #cover-content .title { 
-      font-size: 1.2em; 
-      margin-bottom: 350px; 
-      letter-spacing: 2px; 
-    }
-    #cover-content .names { 
-      font-size: 2.5em; 
-      font-weight: bold; 
-      margin-top: 50px;
-      margin-bottom: 50px; 
-    }
-    #cover-content .guest { 
-      font-size: 1.0em; 
-      margin-bottom: 15px; 
-      margin-top: 50px; 
-    }
-    #cover-content .guest1 { font-size: 0.7em; margin-top: 20px; font-style: italic;}
-    .btn-open {
-      padding: 14px 40px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      background: white;
-      color: black;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s;
-    }
-    .btn-open:hover { background: #f2f2f2; transform: scale(1.05); }
-    .btn-open i { color: #b76e79; font-size: 1.2em; }
+#cover-content .guest {
+  font-size: 1.0em;
+  margin: 0;
+}
+
+#cover-content .guest1 {
+  font-size: 0.7em;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+/* BUTTON */
+.btn-open {
+  padding: 14px 40px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.btn-open:hover { 
+  background: #f2f2f2; 
+  transform: scale(1.05); 
+}
+
+.btn-open i {
+  color: #b76e79; 
+  font-size: 1.2em; 
+}
+
 
 /* HALAMAN ISI */
 #invitation { 
@@ -1301,18 +1338,28 @@
 <!-- COVER -->
 <div id="cover">
   <div id="cover-content">
+
+    <!-- BAGIAN ATAS -->
     <p class="title">The Wedding of</p>
+
+    <!-- BAGIAN TENGAH -->
     <h1 class="names">Arifa & Maulana</h1>
 
-    <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-    <h3 id="namaTamu" class="nama-tamu"></h3> <!-- 🪶 Nama tamu muncul di sini -->
+    <!-- BAGIAN BAWAH -->
+    <div class="bottom-area">
+      <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <h3 id="namaTamu" class="nama-tamu"></h3>
 
-    <button class="btn-open" id="openBtn">
-      <i class="fa-solid fa-envelope"></i> Buka Undangan
-    </button>
-    <p class="guest1">mohon maaf apabila ada salah penulisan nama/gelar/dsb</p>
+      <button class="btn-open" id="openBtn">
+        <i class="fa-solid fa-envelope"></i> Buka Undangan
+      </button>
+
+      <p class="guest1">mohon maaf apabila ada salah penulisan nama/gelar/dsb</p>
+    </div>
+
   </div>
 </div>
+
 
     <!-- ISI -->
 <div class="slideshow">
