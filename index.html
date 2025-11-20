@@ -1757,54 +1757,49 @@ this.classList.add("hidden");
 openBtn.style.display = "inline-block";
 });
 
-  // ============================================================
-// === FIX CLICK BUTTON SALIN ===
 // ============================================================
-window.addEventListener("DOMContentLoaded", () => {
-const copyBtn = document.querySelector(".copy-btn");
-if (copyBtn) {
-copyBtn.style.pointerEvents = "auto";
-copyBtn.style.zIndex = "99999";
-copyBtn.addEventListener("click", copyRek);
-}
-});
-
-// ============================================================
-// === SALIN NOMOR REKENING ===
+// === SALIN NOMOR REKENING (TOMBOL LANGSUNG TERUBAH) ===
 // ============================================================
 function copyRek() {
-const nomor = document.getElementById("nomorRek").textContent.trim();
+  const nomor = document.getElementById("nomorRek").textContent.trim();
+  const btn = document.querySelector(".copy-btn");
+  const icon = btn.querySelector("i");
+  const text = btn.querySelector("span");
 
-if (navigator.clipboard && window.isSecureContext) {
-navigator.clipboard.writeText(nomor)
-.then(() => {
-alert("Nomor rekening berhasil disalin:\n" + nomor);
-})
-.catch(() => {
-fallbackCopy(nomor);
-});
-} else {
-fallbackCopy(nomor);
-}
+  // Copy ke clipboard
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(nomor).catch(() => fallbackCopy(nomor));
+  } else {
+    fallbackCopy(nomor);
+  }
+
+  // Ubah tombol menjadi tersalin
+  icon.className = "fa-solid fa-check";
+  text.textContent = "Tersalin";
+  btn.style.background = "#b6ffb3";
+  btn.style.color = "#0f4d00";
+
+  // Kembalikan tombol ke default dalam 1.5 detik
+  setTimeout(() => {
+    icon.className = "fa-regular fa-copy";
+    text.textContent = "Salin";
+    btn.style.background = "#ffdd7d";
+    btn.style.color = "#1c1400";
+  }, 1500);
 }
 
+// fallback untuk browser lama
 function fallbackCopy(text) {
-const textarea = document.createElement("textarea");
-textarea.value = text;
-textarea.style.position = "fixed";
-textarea.style.opacity = "0";
-document.body.appendChild(textarea);
-textarea.focus();
-textarea.select();
-document.execCommand("copy");
-textarea.remove();
-
-alert("Nomor rekening berhasil disalin:\n" + text);
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
 }
-
-
-
-  
 
   // ============================================================
   // === NAMA TAMU DARI URL ===
