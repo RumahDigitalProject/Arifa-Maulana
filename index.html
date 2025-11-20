@@ -1179,13 +1179,17 @@
 }
 
 /* Nama Bank */
-.bank-name {
+.bank-logo {
   position: absolute;
   top: 15px;
   right: 20px;
-  font-size: 18px;
-  font-weight: 700;
 }
+
+.bank-logo img {
+  width: 70px;   /* Silakan sesuaikan */
+  height: auto;
+}
+
 
 /* Chip di pojok kiri atas */
 .atm-chip {
@@ -1532,7 +1536,9 @@
 
     <!-- Kartu ATM -->
     <div id="atmCard" class="atm-card hidden">
-      <div class="bank-name">SEA BANK</div>
+      <div class="bank-logo">
+   <img src="bank.png" alt="SeaBank Logo">
+</div>
       <div class="atm-chip"></div>
       <div class="rek-number" id="nomorRek">9011 6173 5590</div>
       <button class="copy-btn" onclick="copyRek()">Salin</button>
