@@ -978,7 +978,11 @@
   transform: scale(1) translateY(0);
 }
 
-/* ====== GIFT WEDDING SECTION ====== */
+  text-align: center;
+}
+
+
+
 /* ====== GIFT SECTION ====== */
 #gift {
   position: relative;
@@ -987,35 +991,33 @@
   text-align: center;
   color: #fff;
 
-  /* Background awal nge-zoom */
+  /* Background awal */
   background-image: url('dasar1.webp');
-  background-size: 220%;
+  background-size: 210%;          /* zoom */
   background-position: center top;
   background-repeat: no-repeat;
 
-  min-height: auto;
+  transition: background-size 1.2s ease-out, background-position 1.2s ease-out;
 }
 
-/* Overlay yang nanti smooth fade-in */
-#gift::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('dasar1.webp');
-  background-size: contain;
-  background-position: top center;
-  background-repeat: repeat-y;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  z-index: -1;
-}
-
+/* Saat tombol ditekan → ubah background jadi normal */
 #gift.full-bg {
-  min-height: 100vh;
+  background-size: 100%;
+  background-position: center top;
 }
 
-#gift.full-bg::after {
-  opacity: 1;
+
+
+/* ====== KOTAK UTAMA ====== */
+.gift-container {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
 }
 
 .GIFT-title {
@@ -1025,20 +1027,7 @@
   margin-bottom: 20px;
 }
 
-.gift-container {
-  background: rgba(255,255,255,0.03); /* super tipis, biar blur yang dominan */
-  backdrop-filter: blur(15px);        /* blur lebih kuat */
-  -webkit-backdrop-filter: blur(15px); /* untuk Safari */
-
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 650px;
-  margin: 0 auto;
-
-  /* kurangi shadow biar ga ganggu blur */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-}
-
+/* Tulisan deskripsi */
 .gift-thanks {
   font-size: 16px;
   opacity: 0.9;
@@ -1063,7 +1052,9 @@
   background: #ffe9a8;
 }
 
-/* ====== KARTU ATM PREMIUM (FIX POSITION) ====== */
+
+
+/* ====== KARTU ATM ====== */
 .atm-card {
   width: 100%;
   max-width: 380px;
@@ -1071,7 +1062,7 @@
   margin: 30px auto 0;
   border-radius: 18px;
   padding: 20px;
-  padding-top: 60px;   /* ⬅️ Tambahan baru: bikin konten turun ke tengah */
+  padding-top: 60px;
   position: relative;
   color: #fff;
   box-shadow: 0px 6px 25px rgba(0,0,0,0.5);
@@ -1087,11 +1078,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; 
-  gap: 5px;
+  justify-content: flex-start;
 }
-
-
 
 @keyframes premiumMove {
   0% { background-position: 0% 50%; }
@@ -1104,7 +1092,7 @@
   transform: translateY(0);
 }
 
-/* Nama Bank */
+/* Elemen kartu */
 .bank-name {
   position: absolute;
   top: 15px;
@@ -1113,7 +1101,6 @@
   font-weight: 700;
 }
 
-/* Chip di pojok kiri atas */
 .atm-chip {
   position: absolute;
   top: 20px;
@@ -1125,52 +1112,43 @@
   box-shadow: 0 0 8px rgba(255,215,0,0.4);
 }
 
-/* Nomor rekening - benar2 di tengah */
 .rek-number {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 2px;
-  text-align: center;
 }
 
-/* Nama pemilik */
 .rek-name {
   font-size: 15px;
   opacity: 0.9;
-  text-align: center;
 }
 
-/* Tombol salin */
 .copy-btn {
   position: absolute;
   bottom: 15px;
   left: 15px;
-  transform: none !important;
+  padding: 8px 15px;
+  border-radius: 10px;
   background: #ffdd7d;
   color: #1c1400;
   border: none;
-  padding: 8px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
   font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
   transition: 0.3s;
   z-index: 9999;
 }
 
-
-
 .copy-btn:hover {
-  background: #ffe9a8;
   transform: scale(1.05);
+  background: #ffe9a8;
 }
-
-
-
 
 .hidden { display: none; }
 
-/* ====== KARTU HADIAH (KARTU KE 2) ====== */
+
+
+/* ====== KARTU HADIAH ====== */
 .gift-card {
   width: 100%;
   max-width: 380px;
@@ -1208,9 +1186,9 @@
 
 .gift-receiver {
   font-size: 15px;
-  margin-bottom: 6px;
   opacity: 0.9;
 }
+
 
 
   </style>
