@@ -117,19 +117,24 @@
 
 /* BUTTON */
 .btn-open {
-  padding: 10px 20px;
-  font-size: 1.0em;
+  padding: 8px 16px;
+  font-size: 0.9em;
   border: none;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
   background: white;
   color: black;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s;
+
+  width: auto;
+  align-self: center;  /* ⬅️ TAMBAHKAN INI */
+  white-space: nowrap;
 }
+
 
 .btn-open:hover { 
   background: #f2f2f2; 
