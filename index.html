@@ -798,43 +798,41 @@
   align-items: center;
 }
 
-/* BOX UCAPAN DENGAN BLUR */
+/* BOX UCAPAN TANPA OVERLAY – HANYA BLUR */
 .ucapan-box {
   padding: 40px 30px 80px;
   position: relative;
   border-radius: 40px 40px 80px 80px;
-  overflow: hidden; /* supaya blur overlay tidak keluar */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
-}
 
-/* OVERLAY BLUR */
-.ucapan-box::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.12); /* warna tipis */
-  backdrop-filter: blur(40px); 
+  /* Blur langsung tanpa overlay */
+  backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
-  z-index: 1;
-  border-radius: 40px 40px 80px 80px;
 }
 
-/* KONTEN DI ATAS BLUR */
+/* Tidak butuh overlay ::before lagi */
+.ucapan-box::before {
+  content: none !important;
+}
+
+/* Tidak butuh z-index untuk konten lagi */
 .ucapan-box * {
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
+
 
 .ucapan-teks {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #FFFFFF;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   margin-top: 30px;
   text-align: center;
   font-style: italic;
@@ -846,7 +844,7 @@
   color:  #FFFFFF;
   text-align: center;
   line-height: 1.2;
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
 
@@ -1537,7 +1535,7 @@
         <img alt="Pengantin Perempuan" class="foto" src="foto5.webp" loading="lazy"/>
 
         <p class="ucapan-teks animasi-scroll" data-anim="zoom-up">
-          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih..
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih.
         </p>
 
         <p class="ucapan-nama animasi-scroll" data-anim="zoom-up">
