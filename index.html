@@ -1556,18 +1556,30 @@
     <button id="openGiftBtn" class="btn-gift">Buka Gift</button>
 <button id="closeGiftBtn" class="btn-gift hidden">Tutup Gift</button>
 
-
-    <!-- Kartu ATM -->
-    <div id="atmCard" class="atm-card hidden">
-      <div class="bank-logo">
-   <img src="bank.webp" alt="SeaBank Logo">
+<!-- Kartu ATM 1 -->
+<div id="atmCard" class="atm-card hidden">
+  <div class="bank-logo">
+    <img src="bank.webp" alt="SeaBank Logo">
+  </div>
+  <div class="atm-chip"></div>
+  <div class="rek-number" id="nomorRek">9011 6173 5590</div>
+  <button class="copy-btn" onclick="copyRek(this)">
+    <i class="fa-regular fa-copy"></i> <span>Salin</span>
+  </button>
 </div>
-      <div class="atm-chip"></div>
-      <div class="rek-number" id="nomorRek">9011 6173 5590</div>
-      <button class="copy-btn" onclick="copyRek(this)">
-  <i class="fa-regular fa-copy"></i> <span>Salin</span>
-</button>
-    </div>
+
+<!-- Kartu ATM 2 -->
+<div id="atmCard2" class="atm-card hidden">
+  <div class="bank-logo">
+    <img src="bank.webp" alt="Bank Logo">
+  </div>
+  <div class="atm-chip"></div>
+  <div class="rek-number">6147 01 015847 53 2</div>
+  <button class="copy-btn" onclick="copyRek(this)">
+    <i class="fa-regular fa-copy"></i> <span>Salin</span>
+  </button>
+</div>
+
 
 <!-- KARTU KE 2: KIRIM HADIAH -->
 <div id="giftCard" class="gift-card hidden">
