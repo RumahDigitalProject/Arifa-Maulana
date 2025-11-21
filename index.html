@@ -1722,94 +1722,90 @@ setTimeout(() => {
   
 
 // ============================================================
-// === GIFT ===
+// === GIFT OPEN ===
 // ============================================================
 document.getElementById("openGiftBtn").addEventListener("click", function () {
 
-// === Background jadi full ===
-document.getElementById("gift").classList.add("full-bg");
+  // Background jadi full
+  document.getElementById("gift").classList.add("full-bg");
 
-// Ambil elemen
-const card1 = document.getElementById("atmCard");
-const card2 = document.getElementById("giftCard");
-const closeBtn = document.getElementById("closeGiftBtn");
+  // Ambil elemen kartu
+  const card1 = document.getElementById("atmCard");
+  const card2 = document.getElementById("atmCard2");
+  const card3 = document.getElementById("giftCard");
+  const closeBtn = document.getElementById("closeGiftBtn");
 
-// Tampilkan kartu 1
-card1.classList.remove("hidden");
-setTimeout(() => {
-card1.classList.add("show");
-}, 50);
+  // === Kartu ATM 1 muncul ===
+  card1.classList.remove("hidden");
+  setTimeout(() => {
+    card1.classList.add("show");
+  }, 50);
 
-// Tampilkan kartu 2 (delay)
-setTimeout(() => {
-card2.classList.remove("hidden");
-setTimeout(() => {
-card2.classList.add("show");
-}, 50);
-}, 600);
+  // === Kartu ATM 2 muncul (delay 600ms) ===
+  setTimeout(() => {
+    card2.classList.remove("hidden");
+    setTimeout(() => {
+      card2.classList.add("show");
+    }, 50);
+  }, 600);
 
-// Sembunyikan tombol buka, tampilkan tombol tutup
-this.style.display = "none";
-closeBtn.classList.remove("hidden");
+  // === GiftCard muncul (delay lagi 600ms) ===
+  setTimeout(() => {
+    card3.classList.remove("hidden");
+    setTimeout(() => {
+      card3.classList.add("show");
+    }, 50);
+  }, 1200);
+
+  // Tombol buka disembunyikan → tombol tutup tampil
+  this.style.display = "none";
+  closeBtn.classList.remove("hidden");
 });
 
 // ============================================================
-// === TUTUP GIFT (BARU DITAMBAHKAN) ===
+// === GIFT CLOSE ===
 // ============================================================
 document.getElementById("closeGiftBtn").addEventListener("click", function () {
 
-const gift = document.getElementById("gift");
-const card1 = document.getElementById("atmCard");
-  const card2 = document.getElementById("atmCard2"); 
-const card2 = document.getElementById("giftCard");
-const openBtn = document.getElementById("openGiftBtn");
+  const gift = document.getElementById("gift");
+  const card1 = document.getElementById("atmCard");
+  const card2 = document.getElementById("atmCard2");
+  const card3 = document.getElementById("giftCard");
+  const openBtn = document.getElementById("openGiftBtn");
 
-// Hapus background full
-gift.classList.remove("full-bg");
+  // Hapus background full
+  gift.classList.remove("full-bg");
 
-// Sembunyikan kartu (animasi keluar)
-card1.classList.remove("show");
-card2.classList.remove("show");
+  // Animasi hilang
+  card1.classList.remove("show");
+  card2.classList.remove("show");
+  card3.classList.remove("show");
 
-// Setelah animasi hilang → benaran disembunyikan
-setTimeout(() => {
-card1.classList.add("hidden");
-card2.classList.add("hidden");
-}, 400);
+  // Sembunyikan setelah animasi selesai
+  setTimeout(() => {
+    card1.classList.add("hidden");
+    card2.classList.add("hidden");
+    card3.classList.add("hidden");
+  }, 400);
 
-// Tombol tutup hilang → tombol buka tampil lagi
-this.classList.add("hidden");
-
-// tampilkan kembali tombol buka gift
-openBtn.style.display = "inline-block";
+  // Tombol tutup hilang → tombol buka kembali
+  this.classList.add("hidden");
+  openBtn.style.display = "inline-block";
 });
 
-// ============================================================
-// === FIX CLICK BUTTON SALIN ===
-// ============================================================
-window.addEventListener("DOMContentLoaded", () => {
-  const copyBtn = document.querySelector(".copy-btn");
-  if (copyBtn) {
-    copyBtn.style.pointerEvents = "auto";
-    copyBtn.style.zIndex = "99999";
-    copyBtn.addEventListener("click", copyRek);
-  }
-});
 
 // ============================================================
-// === SALIN NOMOR REKENING ===
+// === SALIN NOMOR REKENING (PER KARTU) ===
 // ============================================================
-function copyRek() {
-  const nomor = document.getElementById("nomorRek").textContent.trim();
+function copyRek(button) {
+  const nomor = button
+    .closest(".atm-card")
+    .querySelector(".rek-number")
+    .textContent.trim();
 
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(nomor)
-      .then(() => {
-        alert("Nomor rekening berhasil disalin:\n" + nomor);
-      })
-      .catch(() => {
-        fallbackCopy(nomor);
-      });
+      .then(() => alert("Nomor rekening berhasil disalin:\n" + nomor));
   } else {
     fallbackCopy(nomor);
   }
