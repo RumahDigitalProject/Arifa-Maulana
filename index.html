@@ -1208,11 +1208,56 @@ animation: premiumMove 6s ease infinite;
   left: 20px;
   width: 48px;
   height: 34px;
-  background: linear-gradient(135deg, gold, #d4af37);
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(255,215,0,0.4);
-  z-index: 2;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg,
+      rgba(255,255,255,0.3),
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.25)
+  );
+  box-shadow: 0 0 8px rgba(255,255,255,0.25);
 }
+
+/* efek hologram bergerak */
+.atm-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+      from 0deg,
+      #ff008c,
+      #ffef00,
+      #00eaff,
+      #b600ff,
+      #ff008c
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.65;
+  animation: holoSpin 4s linear infinite;
+}
+
+/* garis-garis chip */
+.atm-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.25) 0px,
+      rgba(0,0,0,0.25) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  opacity: 0.4;
+}
+
+@keyframes holoSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 
 /* ====== Nomor Rekening ====== */
 .rek-number {
