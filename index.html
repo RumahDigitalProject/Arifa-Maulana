@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <!-- Open Graph -->
   <meta property="og:title" content="Undangan Arifa & Maulana" />
   <meta property="og:description" content="Official Invitation Digital Arifa & Maulana | By Rumah Digital." />
   <meta property="og:image" content="https://rumahdigitalproject.github.io/Arifa-Maulana/foto3.webp" />
@@ -12,10 +11,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>The Wedding of Romadona & Wulan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-<link href="https://fonts.googleapis.com/css2?family=OCR+F&display=swap" rel="stylesheet">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Scheherazade+New&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=OCR+F&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <style>
     /* RESET */
@@ -1003,38 +1007,40 @@
 }
 
 /* Posisi awal (belum terlihat) */
+/* OPTIMASI: Akselerasi perangkat keras untuk animasi mulus */
 .animasi-scroll {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(40px) translateZ(0);
   transition: all 1.5s ease-out;
   will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 .animasi-scroll.muncul {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 /* Arah animasi */
 [data-anim="up"] {
-  transform: translateY(40px);
+  transform: translateY(40px) translateZ(0);
 }
 [data-anim="down"] {
-  transform: translateY(-40px);
+  transform: translateY(-40px) translateZ(0);
 }
 [data-anim="left"] {
-  transform: translateX(-50px);
+  transform: translateX(-50px) translateZ(0);
 }
 [data-anim="right"] {
-  transform: translateX(50px);
+  transform: translateX(50px) translateZ(0);
 }
 [data-anim="zoom-up"] {
   opacity: 0;
-  transform: scale(0.8) translateY(40px);
+  transform: scale(0.8) translateY(40px) translateZ(0);
 }
 .animasi-scroll.muncul[data-anim="zoom-up"] {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0) translateZ(0);
 }
 
 
@@ -1393,17 +1399,13 @@ animation: premiumMove 6s ease infinite;
 </head>
 <body>
 
-<!-- COVER -->
 <div id="cover">
   <div id="cover-content">
 
-    <!-- BAGIAN ATAS -->
     <p class="title">THE WEDDING OF</p>
 
-    <!-- BAGIAN TENGAH -->
     <h1 class="names"></h1>
 
-    <!-- BAGIAN BAWAH -->
     <div class="bottom-area">
       <p class="guest">Kepada Yth. Bapak/Ibu/Saudara/i</p>
       <h3 id="namaTamu" class="nama-tamu"></h3>
@@ -1419,21 +1421,18 @@ animation: premiumMove 6s ease infinite;
 </div>
 
 
-    <!-- ISI -->
-<div class="slideshow" id="slideshow-section">
+    <div class="slideshow" id="slideshow-section">
   <img src="cover1.webp" class="background-image" alt="background">
 
   <div class="scroll-arrow" id="scrollArrow">
-    &#8595;
+    ↓
   </div>
 </div>
 
 
   
 <section id="invitation1" section class="invitation1" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-  <!-- Tulisan di atas box putih -->
-  <p class="bismillah animasi-scroll" data-anim="left">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+<div class="bg-static"></div> <p class="bismillah animasi-scroll" data-anim="left">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
   <p class="salam-undangan animasi-scroll" data-anim="right">
     Assalamu'alaikum Wr. Wb.<br>
     Maha suci Allah SWT yang telah menciptakan makhluk-Nya berpasang-pasangan.<br>
@@ -1441,7 +1440,6 @@ animation: premiumMove 6s ease infinite;
     untuk menghadiri acara pernikahan kami.
   </p>
 
-<!-- BOX PUTIH DI TENGAH -->
 <div class="box-putih-kecil animasi-scroll">
   <div class="profilx">
     <div class="pengantinx animasi-scroll">
@@ -1455,7 +1453,7 @@ animation: premiumMove 6s ease infinite;
       </p>
     </div>
 
-    <div class="and-symbol animasi-scroll">&amp;</div>
+    <div class="and-symbol animasi-scroll">&</div>
 
     <div class="pengantinx animasi-scroll">
       <h2 class="nama-pengantin">ARIFA KHAMIDA ZUNINDA PUTRI</h2>
@@ -1470,7 +1468,6 @@ animation: premiumMove 6s ease infinite;
   </div>
 </div>
 
-  <!-- Tulisan di bawah box putih -->
   <div class="teks-bawah">
     <p class="bismillah animasi-scroll" data-anim="left">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ ۝٢١</p>
     <p class="arti-ayat animasi-scroll" data-anim="right">
@@ -1482,7 +1479,6 @@ animation: premiumMove 6s ease infinite;
 
 
 
-<!-- === COUNTDOWN ACARA === -->
 <section id="countdown-section" class="countdown-section">
   <p class="jdl animasi-scroll" data-anim="up">Menuju Hari Bahagia</h2>
 
@@ -1500,10 +1496,8 @@ animation: premiumMove 6s ease infinite;
 
 
 
-<!-- ACARA: Akad -->
 <section class="acara" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-<div class="box-acara animasi-scroll">
+<div class="bg-static"></div> <div class="box-acara animasi-scroll">
 <p class="judul animasi-scroll" data-anim="zoom-up">Akad Nikah</p>
 <p class="tglacara animasi-scroll" data-anim="zoom-up">Sabtu, 27 Desember 2025</p>
 <p class="waktuacara animasi-scroll" data-anim="zoom-up">
@@ -1511,17 +1505,14 @@ animation: premiumMove 6s ease infinite;
 </p>
 <div class="ikon-rumah animasi-scroll" data-anim="zoom-up">- - - - - - 🛖 - - - - - -</div>
 <p class="alamatacara animasi-scroll" data-anim="zoom-up">Dsn. Bendil Malang  RT 2 RW 3 Desa Mronjo, Kec. Selopuro, Blitar </p>
-<!-- Tombol Maps untuk Akad -->
 <div class="tombol-maps animasi-scroll" data-anim="zoom-up">
 <a href="https://maps.app.goo.gl/m5TbtiQ6D6viDdzP7" rel="noopener" target="_blank">📍 Lihat Maps Lokasi</a>
 </div>
 </div>
 </div>
 </section>
-<!-- ACARA: Resepsi -->
 <section class="acara" style="position: relative;">
-<div class="bg-static"></div> <!-- 🎯 background diam hanya untuk section ini -->
-<div class="box-acara animasi-scroll">
+<div class="bg-static"></div> <div class="box-acara animasi-scroll">
 <p class="judul animasi-scroll" data-anim="zoom-up">Resepsi Pernikahan</p>
 <p class="tglacara animasi-scroll" data-anim="zoom-up">Sabtu, 27 Desember 2025</p>
   <p class="waktuacara animasi-scroll" data-anim="zoom-up">
@@ -1529,7 +1520,6 @@ animation: premiumMove 6s ease infinite;
 </p>
 <div class="ikon-rumah animasi-scroll" data-anim="zoom-up">- - - - - - 🛖 - - - - - -</div>
 <p class="alamatacara animasi-scroll" data-anim="zoom-up">Dsn. Bendil Malang  RT 2 RW 3 Desa Mronjo, Kec. Selopuro, Blitar </p>
-<!-- Tombol Maps untuk Akad -->
 <div class="tombol-maps animasi-scroll" data-anim="zoom-up">
 <a href="https://maps.app.goo.gl/m5TbtiQ6D6viDdzP7" rel="noopener" target="_blank">📍 Lihat Maps Lokasi</a>
 </div>
@@ -1537,48 +1527,41 @@ animation: premiumMove 6s ease infinite;
 </div>
 </section>
 
-<!-- Galeri -->
 <section id="galeri-section" class="galeri-section">
   <h2 class="galeri-title animasi-scroll">Galeri</h2>
   <div class="galeri-grid">
-        <!-- Foto 6 Besar -->
-<div class="galeri-item large animasi-scroll" data-anim="up">
-<img alt="Galeri Foto 4" src="foto18.webp"/>
+        <div class="galeri-item large animasi-scroll" data-anim="up">
+<img alt="Galeri Foto 4" src="foto18.webp" loading="lazy" decoding="async"/>
 </div>
 
 
-    <!-- Foto 6 Besar -->
-<div class="galeri-item large animasi-scroll" data-anim="up">
-<img alt="Galeri Foto 4" src="FOTO.jpg"/>
+    <div class="galeri-item large animasi-scroll" data-anim="up">
+<img alt="Galeri Foto 4" src="FOTO.jpg" loading="lazy" decoding="async"/>
 </div>
-    <!-- Foto 4 & 5 -->
     <div class="galeri-item small animasi-scroll" data-anim="left">
-      <img alt="Galeri Foto 5" src="FOTO200.jpg"/>
+      <img alt="Galeri Foto 5" src="FOTO200.jpg" loading="lazy" decoding="async"/>
     </div>
     <div class="galeri-item small animasi-scroll" data-anim="right">
-      <img alt="Galeri Foto 4" src="FOTO20.jpg"/>
+      <img alt="Galeri Foto 4" src="FOTO20.jpg" loading="lazy" decoding="async"/>
     </div>
-    <!-- Foto 4 & 5 -->
     <div class="galeri-item small animasi-scroll" data-anim="left">
-      <img alt="Galeri Foto 5" src="123.jpg"/>
+      <img alt="Galeri Foto 5" src="123.jpg" loading="lazy" decoding="async"/>
     </div>
     <div class="galeri-item small animasi-scroll" data-anim="right">
-      <img alt="Galeri Foto 4" src="1234.jpg"/>
+      <img alt="Galeri Foto 4" src="1234.jpg" loading="lazy" decoding="async"/>
     </div>
 </section>
 
-<!-- Lightbox -->
 <div id="lightbox" class="lightbox">
-  <span class="close">&times;</span>
+  <span class="close">×</span>
   <img class="lightbox-img" src="">
-  <a class="prev">&#10094;</a>
-  <a class="next">&#10095;</a>
+  <a class="prev">❮</a>
+  <a class="next">❯</a>
 </div>
 
 
 
 
-<!-- === SECTION GIFT WEDDING === -->
 <section id="gift" class="section">
   <div class="gift-container animasi-scroll">
     <h2 class="GIFT-title">Gift Wedding</h2>
@@ -1591,10 +1574,9 @@ animation: premiumMove 6s ease infinite;
 <button id="closeGiftBtn" class="btn-gift hidden">Tutup Gift</button>
 
 
-<!-- KARTU ATM -->
 <div class="atm-card hidden" data-rek="9011 6173 5590">
   <div class="bank-logo">
-    <img src="bank.webp" alt="SeaBank Logo">
+    <img src="bank.webp" alt="SeaBank Logo" loading="lazy" decoding="async">
   </div>
 
   <div class="atm-chip"></div>
@@ -1607,10 +1589,9 @@ animation: premiumMove 6s ease infinite;
   </button>
 </div>
 
-  <!-- KARTU ATM -->
-<div class="atm-card hidden" data-rek="6147 01 015847 53 2">
+  <div class="atm-card hidden" data-rek="6147 01 015847 53 2">
   <div class="bank-logo">
-    <img src="bankbri.webp" alt="SeaBank Logo">
+    <img src="bankbri.webp" alt="SeaBank Logo" loading="lazy" decoding="async">
   </div>
 
   <div class="atm-chip"></div>
@@ -1625,7 +1606,6 @@ animation: premiumMove 6s ease infinite;
 
 
 
-<!-- KARTU KE 2: KIRIM HADIAH -->
 <div id="giftCard" class="gift-card hidden">
 
   <div class="gift-icon">🎁</div>
@@ -1638,7 +1618,6 @@ animation: premiumMove 6s ease infinite;
 
 
   
-<!-- === SECTION RSVP & UCAPAN === -->
 <section id="rsvp" class="section" style="padding:60px 20px; text-align:center; color:#fff;">
   <div class="rsvp-container">
     <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
@@ -1667,14 +1646,12 @@ animation: premiumMove 6s ease infinite;
   
 
 
-<!-- MUSIK -->
-  <audio id="bgMusic" loop preload="none">
+<audio id="bgMusic" loop preload="none">
     <source src="lagu.mp3" type="audio/mpeg">
   </audio>
 
 
-    <!-- === MENU NAVIGASI BAWAH === -->
-<nav class="menu-bawah" id="menuNavigasi">
+    <nav class="menu-bawah" id="menuNavigasi">
   <a href="#slideshow-section" title="Slideshow"><i class="fa-solid fa-house"></i></a>
   <a href="#invitation1" title="invitation1"><i class="fa-solid fa-heart"></i></a>
   <a href="#countdown-section" title="countdown-section"><i class="fa-solid fa-calendar-days"></i></a>
@@ -1683,15 +1660,13 @@ animation: premiumMove 6s ease infinite;
   <a href="#rsvp" title="Ucapan"><i class="fa-solid fa-message"></i></a>
 </nav>
 
-<!-- WRAPPER BACKGROUND MENYATUKAN UCAPAN + FOOTER -->
 <div class="ucapan-footer-bg">
 
-  <!-- SECTION UCAPAN -->
   <section id="ucapan">
     <div class="ucapan-box animasi-scroll">
 
       <div class="pengantin animasi-scroll" data-anim="zoom-up">
-        <img alt="Pengantin Perempuan" class="foto" src="foto5.webp" loading="lazy"/>
+        <img alt="Pengantin Perempuan" class="foto" src="foto5.webp" loading="lazy" decoding="async"/>
 
         <p class="ucapan-teks animasi-scroll" data-anim="zoom-up">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu, Atas kehadiran dan doa restunya kami mengucapkan terima kasih.
@@ -1707,7 +1682,6 @@ animation: premiumMove 6s ease infinite;
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer-wedding">
     <p class="footer-made">Made With By</p>
     <div class="footer-brand">
@@ -2085,3 +2059,6 @@ lightbox.addEventListener('click', (e) => {
 
 });
 </script>
+</body>
+</html>
+
